@@ -2,88 +2,94 @@ package com.example.deshan.mad_sims.Attendance;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.deshan.mad_sims.R;
 
-import java.util.Calendar;
+import de.codecrafters.tableview.TableView;
 
 public class desDisplay extends AppCompatActivity {
 
     Button btn;
-    int year,month,date;
-    static  final int dilog_id = 0;
     TextView txt;
+    DatabaseHelper mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_des_display);
+        mydb = new DatabaseHelper(this);
 
-        final Calendar cal = Calendar.getInstance();
-        year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH);
-        date = cal.get(Calendar.DAY_OF_MONTH);
+        TableLayout tableLayout=(TableLayout)findViewById(R.id.table);
 
-        showDialogOnButtonClick();
 
-        Spinner subjects2 = (Spinner)findViewById(R.id.spinner3);
+        TableRow rowHeader = new TableRow(this);
+        rowHeader.setBackgroundColor(Color.parseColor("#c0c0c0"));
+        rowHeader.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
+                TableLayout.LayoutParams.WRAP_CONTENT));
+        String[] headerText={"Id  ","Subject  ","Type  ","Date  "};
+        for(String c:headerText) {
+            TextView tv = new TextView(this);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT));
+            tv.setGravity(Gravity.CENTER);
+            tv.setTextSize(18);
+            tv.setPadding(5, 5, 5, 5);
+            tv.setText(c);
+            rowHeader.addView(tv);
+        }
+        tableLayout.addView(rowHeader);
 
-        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(desDisplay.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.subs));
+        Cursor cursor = mydb.getAllData();
 
-        myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        subjects2.setAdapter(myAdapter2);
+        if(cursor.getCount() >0)
+        {
+            while (cursor.moveToNext()) {
+                // Read columns data
+                String id = cursor.getString(0);
+                String sub = cursor.getString(1);
+                String ty = cursor.getString(2);
+                String da = cursor.getString(3);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+                // dara rows
+                TableRow row = new TableRow(this);
+                row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
+                        TableLayout.LayoutParams.WRAP_CONTENT));
+                String[] colText={id+"",sub,ty,da};
+                for(String text:colText) {
+                    TextView tv = new TextView(this);
+                    tv.setTextColor(Color.RED);
+                    tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.WRAP_CONTENT));
+                    tv.setGravity(Gravity.CENTER);
+                    tv.setTextSize(16);
+                    tv.setPadding(5, 5, 5, 5);
+                    tv.setText(text);
+                    row.addView(tv);
+                    row.setClickable(true);
+                }
+                tableLayout.addView(row);
 
-    public void showDialogOnButtonClick(){
-        btn = (Button)findViewById(R.id.button7);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog(dilog_id);
             }
-        });
-    }
-
-    @Override
-    protected Dialog onCreateDialog(int id){
-        if(id == dilog_id)
-            return new DatePickerDialog(this,dpickerListener,year,month,date);
-        return null;
-    }
-
-    private DatePickerDialog.OnDateSetListener dpickerListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-            year = i;
-            month = i1;
-            date = i2;
-
-            txt = (TextView)findViewById(R.id.textView15);
-            txt.setText(year+"/"+month+"/"+date);
         }
-    };
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
 
-        if(id == android.R.id.home){
-            this.finish();
-        }
-        return super.onOptionsItemSelected(item);
 
     }
+
+
 }
