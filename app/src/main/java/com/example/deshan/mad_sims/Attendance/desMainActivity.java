@@ -1,6 +1,7 @@
 package com.example.deshan.mad_sims.Attendance;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,11 +30,11 @@ public class desMainActivity extends AppCompatActivity {
 
 
         Spinner subjects = (Spinner)findViewById(R.id.spinner2);
-
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(desMainActivity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.subs));
-
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subjects.setAdapter(myAdapter);
+        subjects.setBackgroundColor(Color.WHITE);
+
 
 
     }
@@ -55,6 +56,9 @@ public class desMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(".desDisplay");
+                Spinner sub = (Spinner)findViewById(R.id.spinner2);
+                String subs = sub.getSelectedItem().toString();
+                intent1.putExtra("sub", subs);
                 startActivity(intent1);
             }
         });

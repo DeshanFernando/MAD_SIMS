@@ -33,10 +33,10 @@
     <Spinner
         android:id="@+id/spinner6"
         android:layout_width="344dp"
-        android:layout_height="28dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,9 +66,24 @@
         android:id="@+id/textView23"
         android:layout_width="match_parent"
         android:layout_height="3dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="72dp"
         android:background="@android:color/holo_red_light"
         android:text="TextView"
         app:layout_constraintTop_toBottomOf="@+id/button4"
         tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="352dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Percentage"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
 </android.support.constraint.ConstraintLayout>

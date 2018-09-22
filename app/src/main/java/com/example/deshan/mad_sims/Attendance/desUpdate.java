@@ -3,6 +3,7 @@ package com.example.deshan.mad_sims.Attendance;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -45,12 +46,13 @@ public class desUpdate extends AppCompatActivity {
         ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(desUpdate.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.subs));
         myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subjects2.setAdapter(myAdapter2);
+        subjects2.setBackgroundColor(Color.WHITE);
 
         Spinner classTypes = (Spinner)findViewById(R.id.spinner4);
         ArrayAdapter<String> myAdapter1 = new ArrayAdapter<String>(desUpdate.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.types));
         myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         classTypes.setAdapter(myAdapter1);
-
+        classTypes.setBackgroundColor(Color.WHITE);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

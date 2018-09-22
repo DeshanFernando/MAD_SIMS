@@ -2,6 +2,7 @@ package com.example.deshan.mad_sims.Attendance;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -24,15 +26,17 @@ import de.codecrafters.tableview.TableView;
 
 public class desDisplay extends AppCompatActivity {
 
-    Button btn;
+    Button btn,btn_del;
     TextView txt;
     DatabaseHelper mydb;
+    EditText id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_des_display);
         mydb = new DatabaseHelper(this);
+        onclickListener();
 
         TableLayout tableLayout=(TableLayout)findViewById(R.id.table);
 
@@ -54,25 +58,29 @@ public class desDisplay extends AppCompatActivity {
         }
         tableLayout.addView(rowHeader);
 
-        Cursor cursor = mydb.getAllData();
+        Intent intent = getIntent();
+        String SUB = intent.getStringExtra("sub");
+
+
+        Cursor cursor = mydb.getSubData(SUB);
 
         if(cursor.getCount() >0)
         {
             while (cursor.moveToNext()) {
-                // Read columns data
+
                 String id = cursor.getString(0);
                 String sub = cursor.getString(1);
                 String ty = cursor.getString(2);
                 String da = cursor.getString(3);
 
-                // dara rows
+
                 TableRow row = new TableRow(this);
                 row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
                         TableLayout.LayoutParams.WRAP_CONTENT));
                 String[] colText={id+"",sub,ty,da};
                 for(String text:colText) {
                     TextView tv = new TextView(this);
-                    tv.setTextColor(Color.RED);
+                    tv.setTextColor(Color.WHITE);
                     tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                             TableRow.LayoutParams.WRAP_CONTENT));
                     tv.setGravity(Gravity.CENTER);
@@ -86,10 +94,24 @@ public class desDisplay extends AppCompatActivity {
 
             }
         }
-
-
-
     }
 
+    public void onclickListener(){
+        btn_del = (Button)findViewById(R.id.button7);
+        btn_del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                id = (EditText)findViewById(R.id.editText);
+                int ret = mydb.deleteData(id.getText().toString());
+
+                if(ret > 0)
+                    Toast.makeText(desDisplay.this, "Data Deleted", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(desDisplay.this,"Data not Deleted", Toast.LENGTH_LONG).show();
+
+
+            }
+        });
+    }
 
 }
