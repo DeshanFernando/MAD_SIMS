@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    tools:context=".Events.PumMainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Event Management"
+        android:textColor="@android:color/black"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/button2"
+        android:layout_marginTop="160dp"
+        android:onClick="onClick"
+        android:text="@string/create"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button3"
+        android:layout_centerVertical="true"
+        android:onClick="onClick1"
+        android:text="@string/update"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/button4"
+        android:layout_marginBottom="156dp"
+        android:onClick="onClick2"
+        android:text="@string/delete"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="67dp"
+        android:layout_marginEnd="25dp"
+        android:onClick="onClick3"
+        android:text="@string/value"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/button"
+        android:layout_marginStart="43dp"
+        app:srcCompat="@drawable/index" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/images2" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignTop="@+id/button3"
+        app:srcCompat="@drawable/index1" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignTop="@+id/button4"
+        app:srcCompat="@drawable/index3" />
+
+</RelativeLayout>
