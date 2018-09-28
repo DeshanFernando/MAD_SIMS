@@ -7,13 +7,13 @@
     tools:context=".MAD_MainActivity">
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/btnDiary"
         android:layout_width="179dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="64dp"
-        android:text="User"
+        android:text="Diary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +26,7 @@
         android:layout_marginTop="56dp"
         android:text="attendance"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button13" />
+        app:layout_constraintTop_toBottomOf="@+id/btnDiary" />
 
     <Button
         android:id="@+id/button15"
