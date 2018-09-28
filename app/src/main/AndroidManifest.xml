@@ -59,6 +59,7 @@
         <activity android:name=".Events.PumDelete"></activity>
       
         <activity android:name=".diary.DiaryActivity"></activity>
+        <activity android:name=".diary.DiaryEditActivity"></activity>
 
     </application>
 
