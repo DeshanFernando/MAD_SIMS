@@ -99,7 +99,7 @@ public class DiaryActivity extends AppCompatActivity {
 
         cursor.close();
 
-
+        //sd
 
 
 

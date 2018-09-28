@@ -106,7 +106,7 @@ public class Item implements BaseColumns, Serializable{
         //System.out.println(_ID);
         db.update(TABLE_NAME, values, _ID+"="+id, null);
 
-    }
+    } 
 
     @Override
     public String toString() {

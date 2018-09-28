@@ -49,7 +49,7 @@ public class DiaryEditActivity extends AppCompatActivity {
                 item.setDueTime(Time.valueOf(etTime.getText().toString().trim()));
                 item.setImportant(true);
                 item.save(DiaryEditActivity.this);
-
+                //sd
                 finish();
             }
         });
