@@ -40,6 +40,9 @@ public class desUpdate extends AppCompatActivity {
         month = cal.get(Calendar.MONTH);
         date = cal.get(Calendar.DAY_OF_MONTH);
 
+        txtId = findViewById(R.id.editText2);
+        txtId.setHintTextColor(Color.WHITE);
+
         showDialogOnButtonClick();
 
         Spinner subjects2 = (Spinner)findViewById(R.id.spinner7);

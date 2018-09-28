@@ -38,6 +38,9 @@ public class desDisplay extends AppCompatActivity {
         mydb = new DatabaseHelper(this);
         onclickListener();
 
+        id = (EditText)findViewById(R.id.editText);
+        id.setHintTextColor(Color.WHITE);
+
         TableLayout tableLayout=(TableLayout)findViewById(R.id.table);
 
 
