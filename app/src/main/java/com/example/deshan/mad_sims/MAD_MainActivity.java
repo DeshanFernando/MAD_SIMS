@@ -7,17 +7,23 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.deshan.mad_sims.diary.DiaryActivity;
+import com.example.deshan.mad_sims.Events.PumMainActivity;
 
 public class MAD_MainActivity extends AppCompatActivity {
 
     private static Button button_enterAtt;
+    private static Button eventbtn;
+  
+    //Start of Diary Button
     private Button btnDiary;
+    //End of Diary Button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mad__main);
         onClickButtonListener();
+       // onClicklistener();
 
     }
 
@@ -42,4 +48,14 @@ public class MAD_MainActivity extends AppCompatActivity {
         });
         //End of Diary Activity Navigation
     }
+
+
+
+    public void onClick1(View view){
+
+        Intent myint  = new Intent(this, PumMainActivity.class);
+        startActivity(myint);
+    }
+
+
 }
