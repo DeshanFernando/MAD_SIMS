@@ -12,4 +12,8 @@
         <item>Lecture</item>
         <item>Practical</item>
     </string-array>
+    <string name="update">Update Event</string>
+    <string name="create">Create Event</string>
+    <string name="delete">Delete Event</string>
+    <string name="value">View Event</string>
 </resources>
