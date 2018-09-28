@@ -51,15 +51,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Events.PumMainActivity" />
         <activity android:name=".Events.PumCreate" />
         <activity android:name=".Events.PumUpdate" />
         <activity android:name=".Events.PumView" />
         <activity android:name=".Events.PumDelete"></activity>
-
-
-
-
+      
+        <activity android:name=".diary.DiaryActivity"></activity>
 
     </application>
 
