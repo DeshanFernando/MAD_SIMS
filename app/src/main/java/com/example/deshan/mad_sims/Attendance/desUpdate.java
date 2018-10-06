@@ -1,9 +1,12 @@
 package com.example.deshan.mad_sims.Attendance;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -71,37 +74,52 @@ public class desUpdate extends AppCompatActivity {
 
                 txtId = findViewById(R.id.editText2);
                 String id = txtId.getText().toString();
-                Cursor cursor = mydb.getForUpdate(id);
 
-                Spinner subjects2 = (Spinner)findViewById(R.id.spinner7);
-                Spinner classTypes = (Spinner)findViewById(R.id.spinner4);
+                if(id.equals("")){
+                    AlertDialog alertDialog = new AlertDialog.Builder(desUpdate.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Insert Table Id");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+                else {
+                    Cursor cursor = mydb.getForUpdate(id);
 
-                if(cursor.getCount() == 0)
-                    Toast.makeText(desUpdate.this, "Data doesn't exist", Toast.LENGTH_LONG).show();
+                    Spinner subjects2 = (Spinner) findViewById(R.id.spinner7);
+                    Spinner classTypes = (Spinner) findViewById(R.id.spinner4);
 
-                while(cursor.moveToNext()){
-                    String sub = cursor.getString(1);
-                    String ty = cursor.getString(2);
-                    String da = cursor.getString(3);
+                    if (cursor.getCount() == 0)
+                        Toast.makeText(desUpdate.this, "Data doesn't exist", Toast.LENGTH_LONG).show();
 
-                    if(sub.equals("SE"))
-                        subjects2.setSelection(0);
-                    else if(sub.equals("DBMS"))
-                        subjects2.setSelection(1);
-                    else if(sub.equals("OOP"))
-                        subjects2.setSelection(2);
-                    else if(sub.equals("PS"))
-                        subjects2.setSelection(3);
+                    while (cursor.moveToNext()) {
+                        String sub = cursor.getString(1);
+                        String ty = cursor.getString(2);
+                        String da = cursor.getString(3);
 
-                    if(ty.equals("Lab"))
-                        classTypes.setSelection(0);
-                    else if(ty.equals("Lecture"))
-                        classTypes.setSelection(1);
-                    else if(ty.equals("Practical"))
-                        classTypes.setSelection(2);
+                        if (sub.equals("SE"))
+                            subjects2.setSelection(0);
+                        else if (sub.equals("DBMS"))
+                            subjects2.setSelection(1);
+                        else if (sub.equals("OOP"))
+                            subjects2.setSelection(2);
+                        else if (sub.equals("PS"))
+                            subjects2.setSelection(3);
 
-                    txt = (TextView)findViewById(R.id.textView18);
-                    txt.setText(da);
+                        if (ty.equals("Lab"))
+                            classTypes.setSelection(0);
+                        else if (ty.equals("Lecture"))
+                            classTypes.setSelection(1);
+                        else if (ty.equals("Practical"))
+                            classTypes.setSelection(2);
+
+                        txt = (TextView) findViewById(R.id.textView18);
+                        txt.setText(da);
+                    }
                 }
 
             }
@@ -114,20 +132,73 @@ public class desUpdate extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Spinner subjects2 = (Spinner)findViewById(R.id.spinner7);
-                Spinner classTypes = (Spinner)findViewById(R.id.spinner4);
-                txt = (TextView)findViewById(R.id.textView18);
                 txtId = findViewById(R.id.editText2);
+                Cursor cursor = mydb.getForUpdate(txtId.getText().toString());
+                txt = (TextView) findViewById(R.id.textView18);
 
-                int isUpdated = mydb.updateData(txtId.getText().toString(), subjects2.getSelectedItem().toString(),
-                        classTypes.getSelectedItem().toString(), txt.getText().toString());
-                
-                String c = Integer.toString(isUpdated);
+                if(txtId.getText().toString().equals("")){
+                    AlertDialog alertDialog = new AlertDialog.Builder(desUpdate.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Check table first!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                    return;
+                }
+                else if (cursor.getCount() == 0){
+                    AlertDialog alertDialog = new AlertDialog.Builder(desUpdate.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Table Id Does not Exist!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                    return;
+                }
 
-                if(isUpdated == 0)
-                    Toast.makeText(desUpdate.this, "Data not Updated", Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(desUpdate.this,"Data Updated", Toast.LENGTH_LONG).show();
+
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(desUpdate.this, android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(desUpdate.this);
+                }
+                builder.setTitle("Update entry")
+                        .setMessage("Are you sure you want to update this entry?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Spinner subjects2 = (Spinner)findViewById(R.id.spinner7);
+                                Spinner classTypes = (Spinner)findViewById(R.id.spinner4);
+                                txt = (TextView)findViewById(R.id.textView18);
+                                txtId = findViewById(R.id.editText2);
+
+                                int isUpdated = mydb.updateData(txtId.getText().toString(), subjects2.getSelectedItem().toString(),
+                                        classTypes.getSelectedItem().toString(), txt.getText().toString());
+
+                                String c = Integer.toString(isUpdated);
+
+                                if(isUpdated == 0)
+                                    Toast.makeText(desUpdate.this, "Data not Updated", Toast.LENGTH_LONG).show();
+                                else
+                                    Toast.makeText(desUpdate.this,"Data Updated", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+
             }
         });
     }

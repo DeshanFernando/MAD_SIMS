@@ -1,10 +1,13 @@
 package com.example.deshan.mad_sims.Attendance;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -104,14 +107,67 @@ public class desDisplay extends AppCompatActivity {
         btn_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 id = (EditText)findViewById(R.id.editText);
-                int ret = mydb.deleteData(id.getText().toString());
+                Cursor cursor = mydb.getForUpdate(id.getText().toString());
 
-                if(ret > 0)
-                    Toast.makeText(desDisplay.this, "Data Deleted", Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(desDisplay.this,"Data not Deleted", Toast.LENGTH_LONG).show();
+                if(id.getText().toString().equals("")){
+                    AlertDialog alertDialog = new AlertDialog.Builder(desDisplay.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Insert Table Id!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+                else if (cursor.getCount() == 0){
+                    AlertDialog alertDialog = new AlertDialog.Builder(desDisplay.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Table Id Does not Exist!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                    return;
+                }
 
+                else {
+
+                    AlertDialog.Builder builder;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        builder = new AlertDialog.Builder(desDisplay.this, android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        builder = new AlertDialog.Builder(desDisplay.this);
+                    }
+                    builder.setTitle("Delete entry")
+                            .setMessage("Are you sure you want to delete this entry?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+
+                                    int ret = mydb.deleteData(id.getText().toString());
+
+                                    if (ret > 0)
+                                        Toast.makeText(desDisplay.this, "Data Deleted", Toast.LENGTH_LONG).show();
+                                    else
+                                        Toast.makeText(desDisplay.this, "Data not Deleted", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
 
             }
         });

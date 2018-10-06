@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">MAD_SIMS</string>
 
+    <string name ="m1">Enter Attendance</string>
+    <string name ="m2">View Attendance</string>
+    <string name ="m3">Update Attendance</string>
+    <string name ="m4">View Percentage</string>
+    <string name ="Adel">Delete</string>
+    <string name ="Aenter">Enter</string>
+    <string name ="Aupdate">Update</string>
+    <string name ="Acheck">Check Table</string>
+    <string name ="Aperc">Get Percentage</string>
+
+
+
     <string-array name="subs">
         <item>SE</item>
         <item>DBMS</item>

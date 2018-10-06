@@ -7,14 +7,28 @@
     android:background="@drawable/back"
     tools:context=".MAD_MainActivity">
 
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00ccbe"
+        android:gravity="center"
+        android:text="Student Information Manager"
+        android:textSize="24sp"
+        app:fontFamily="casual"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
     <Button
         android:id="@+id/btnDiary"
         android:layout_width="179dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="96dp"
         android:text="Diary"
+        android:textSize="18sp"
+        app:fontFamily="cursive"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,8 +38,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="64dp"
         android:text="attendance"
+        android:textSize="18sp"
+        app:fontFamily="cursive"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnDiary" />
 
@@ -35,8 +51,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="60dp"
         android:text="marks"
+        android:textSize="18sp"
+        app:fontFamily="cursive"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button14" />
 
@@ -46,9 +64,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="60dp"
         android:onClick="onClick1"
         android:text="Events"
+        android:textSize="18sp"
+        app:fontFamily="cursive"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button15" />
 </android.support.constraint.ConstraintLayout>

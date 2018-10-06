@@ -1,7 +1,9 @@
 package com.example.deshan.mad_sims.Attendance;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,11 +64,27 @@ public class desEnter_Attendance extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean isInserted = mydb.insertData(subjects.getSelectedItem().toString(),classTypes.getSelectedItem().toString(),txt.getText().toString());
-                if(isInserted == true)
-                    Toast.makeText(desEnter_Attendance.this, "Data Inserted", Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(desEnter_Attendance.this, "Data not Inserted", Toast.LENGTH_LONG).show();
+
+                if(txt.getText().toString().equals("Date")){
+                    AlertDialog alertDialog = new AlertDialog.Builder(desEnter_Attendance.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Insert Date");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+
+                }
+                else {
+                    boolean isInserted = mydb.insertData(subjects.getSelectedItem().toString(), classTypes.getSelectedItem().toString(), txt.getText().toString());
+                    if (isInserted == true)
+                        Toast.makeText(desEnter_Attendance.this, "Data Inserted", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(desEnter_Attendance.this, "Data not Inserted", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
