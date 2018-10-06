@@ -2,6 +2,7 @@ package com.example.deshan.mad_sims.Events;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -91,6 +92,7 @@ public class PumCreate extends AppCompatActivity {
                         String ename = editname.getText().toString();
                         String edate = editdate.getText().toString();
                         String evenue = editvenue.getText().toString();
+                        String etype = edittype.getSelectedItem().toString();
 
                         if (TextUtils.isEmpty(eid)) {
                             editid.setError("Input Required");
@@ -100,8 +102,10 @@ public class PumCreate extends AppCompatActivity {
                             editname.setError("Input Required");
                         } else if (!USER_NAME.matcher(ename).matches()) {
                             editname.setError("Please enter a valid name");
-                        } else if (TextUtils.isEmpty(edate)) {
-                            editdate.setError("Input Required");
+                        }else if (TextUtils.isEmpty(edate)) {
+                            showMessage("Error","Select the Date");
+                        }else if(etype.equalsIgnoreCase("Type of Event")){
+                            showMessage("Error","Select the Type");
                         }else if (!USER_VENUE.matcher(evenue).matches()){
                             editvenue.setError("Please enter valid venue");
                         }else if (TextUtils.isEmpty(evenue)) {
@@ -169,6 +173,14 @@ public class PumCreate extends AppCompatActivity {
         }
     };
 
+    public void showMessage(String title,String message) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
+    }
 
 
 
