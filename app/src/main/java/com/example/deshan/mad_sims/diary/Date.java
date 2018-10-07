@@ -59,8 +59,26 @@ public class Date implements Serializable{
         return null;
     }
 
+    public static java.sql.Date toSQLDate(java.util.Date date){
+
+        return new java.sql.Date(date.getTime());
+
+    }
+
     @Override
     public String toString() {
-        return year + "-" + month + "-" + day;
+
+        String y = year + "";
+        String m = month +"";
+        String d = day +"";
+
+        if(month < 10){
+            m = "0"+month;
+        }
+        if(day < 10){
+            d = "0"+day;
+        }
+
+        return y + "-" + m + "-" + d;
     }
 }
