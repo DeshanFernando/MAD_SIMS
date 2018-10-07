@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ba"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".diary.DiaryEditActivity">
@@ -47,14 +48,19 @@
             android:hint="due date"
             android:inputType="date" />
 
+        <Button
+            android:id="@+id/btnSetDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Date" />
+
         <EditText
             android:id="@+id/etTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="due time"
-            android:inputType="time"
-            />
+            android:inputType="time" />
 
     </LinearLayout>
 

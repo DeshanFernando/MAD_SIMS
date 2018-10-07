@@ -37,7 +37,7 @@ public class Item implements BaseColumns, Serializable{
         this.id = 0;
         this.title = "Test Title";
         this.important = false;
-        this.dueDate = new Date(2018, 9, 23);
+        this.dueDate = new Date(2018, 10, 7);
         this.dueTime = new Time(15, 32);
         this.body = "Test Body";
     }
