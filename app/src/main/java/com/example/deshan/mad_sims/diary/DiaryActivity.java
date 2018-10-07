@@ -33,7 +33,7 @@ public class DiaryActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         title = findViewById(R.id.etSearch);
-        title.setText("2018-09-08");
+        title.setText("2018-10-07");
 
         Button btnSearch = findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(getSearchListener());
@@ -65,6 +65,12 @@ public class DiaryActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Date dl = new Date();
+                dl.setDay(7);
+                dl.setMonth(9);
+                dl.setYear(2018);
+
                 new DatePickerDialog(DiaryActivity.this, new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker dp, int i, int i1, int i2) {
@@ -75,7 +81,7 @@ public class DiaryActivity extends AppCompatActivity {
                         title.setText(dx.toString());
                         search();
                     }
-                }, 2018, 2, 1).show();
+                }, dl.getYear(), dl.getMonth(), dl.getDay()).show();
 
             }
         };

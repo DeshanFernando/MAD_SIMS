@@ -15,7 +15,7 @@ import com.example.deshan.mad_sims.R;
 public class DiaryEditActivity extends AppCompatActivity {
 
     private EditText etTitle, etBody, etDate, etTime;
-    private Button btnSave, btnDelete;
+    private Button btnSave, btnDelete, btnSetDate;
 
     private Item item;
 
@@ -39,15 +39,25 @@ public class DiaryEditActivity extends AppCompatActivity {
 
         btnDelete = findViewById(R.id.btnDelete);
 
+        btnSetDate = findViewById(R.id.btnSetDate);
+
         etTitle.setText(item.getTitle());
         etBody.setText(item.getBody());
         etDate.setText(item.getDueDate().toString());
         etTime.setText(item.getDueTime().toString());
+        etDate.setEnabled(false);
 
 
-        etDate.setOnClickListener(new View.OnClickListener() {
+
+        btnSetDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Date dl = new Date();
+                dl.setDay(7);
+                dl.setMonth(9);
+                dl.setYear(2018);
+
                 new DatePickerDialog(DiaryEditActivity.this, new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker dp, int i, int i1, int i2) {
@@ -57,7 +67,7 @@ public class DiaryEditActivity extends AppCompatActivity {
                         dx.setDay(dp.getDayOfMonth());
                         etDate.setText(dx.toString());
                     }
-                }, 2018, 2, 1).show();
+                }, dl.getYear(), dl.getMonth(), dl.getDay()).show();
             }
         });
 
@@ -67,6 +77,10 @@ public class DiaryEditActivity extends AppCompatActivity {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    if(!validate())
+                        return;
+
                     item.setTitle(etTitle.getText().toString());
                     item.setBody(etBody.getText().toString());
                     item.setDueDate(Date.valueOf(etDate.getText().toString().trim()));
@@ -92,6 +106,10 @@ public class DiaryEditActivity extends AppCompatActivity {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    if(!validate())
+                        return;
+
                     item.setTitle(etTitle.getText().toString());
                     item.setBody(etBody.getText().toString());
                     item.setDueDate(Date.valueOf(etDate.getText().toString().trim()));
@@ -104,5 +122,39 @@ public class DiaryEditActivity extends AppCompatActivity {
             });
             btnDelete.setEnabled(false);
         }
+    }
+
+    private boolean validate(){
+
+        String msg = "";
+        String title = etTitle.getText().toString();
+        String body = etBody.getText().toString();
+        String date = etDate.getText().toString();
+        String time = etTime.getText().toString();
+
+        if(title.equals("")){
+            msg += "Empty Title !\n";
+        }
+
+        if(body.equals("")){
+            msg += "Empty body !\n";
+        }
+
+        if(date.equals("")){
+            msg += "Empty Date !\n";
+        }
+
+        if(time.equals("")){
+            msg += "Empty Time !\n";
+        }
+
+        if(title.equals("") || body.equals("") || date.equals("") || time.equals("")){
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        Toast.makeText(this, "Operation Successfully Executed !", Toast.LENGTH_SHORT).show();
+        return true;
+
     }
 }
