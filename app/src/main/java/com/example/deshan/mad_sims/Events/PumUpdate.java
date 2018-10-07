@@ -163,7 +163,7 @@ public class PumUpdate extends AppCompatActivity {
                         String ename = editname.getText().toString();
                         String edate = editdate.getText().toString();
                         String evenue = editvenue.getText().toString();
-                        String type = edittype.getSelectedItem().toString();
+                        String etype = edittype.getSelectedItem().toString();
 
 
 
@@ -177,8 +177,10 @@ public class PumUpdate extends AppCompatActivity {
                             editname.setError("Input Required");
                         } else if (!USER_NAME.matcher(ename).matches()) {
                             editname.setError("Please enter a valid name");
-                        } else if (TextUtils.isEmpty(edate)) {
-                            editdate.setError("Input Required");
+                        }else if (TextUtils.isEmpty(edate)) {
+                            showMessage("Error","Select the Date");
+                        }else if(etype.equalsIgnoreCase("Type of Event")){
+                            showMessage("Error","Select the Type");
                         }else if (!USER_VENUE.matcher(evenue).matches()){
                             editvenue.setError("Please enter valid venue");
                         }else if (TextUtils.isEmpty(evenue)) {

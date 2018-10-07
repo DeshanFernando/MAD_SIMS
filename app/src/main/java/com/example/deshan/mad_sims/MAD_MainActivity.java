@@ -23,7 +23,7 @@ public class MAD_MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mad__main);
         onClickButtonListener();
-       // onClicklistener();
+       // onClickListener2();
 
     }
 
@@ -51,11 +51,26 @@ public class MAD_MainActivity extends AppCompatActivity {
 
 
 
-    public void onClick1(View view){
+   /*public void onClickListener2(){
+        eventbtn = (Button)findViewById(R.id.button16);
 
-        Intent myint  = new Intent(this, PumMainActivity.class);
-        startActivity(myint);
-    }
+        eventbtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent newint = new Intent(MAD_MainActivity.this,PumMainActivity.class);
+                        startActivity(newint);
+                    }
+                }
+        );
+   }*/
+
+   public void onClick1(View view){
+
+       Intent myint = new Intent(MAD_MainActivity.this,PumMainActivity.class);
+       startActivity(myint);
+
+   }
 
 
 }

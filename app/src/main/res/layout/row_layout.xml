@@ -9,34 +9,49 @@
 
         android:id="@+id/eid"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:text="TextView" />
+        android:layout_height="57dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="TextView"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 
     <TextView
 
         android:id="@+id/ename"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:text="TextView" />
+        android:layout_height="57dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="TextView"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 
     <TextView
 
         android:id="@+id/edate"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:text="TextView" />
+        android:layout_height="57dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="TextView"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 
     <TextView
 
         android:id="@+id/etype"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:text="TextView" />
+        android:layout_height="57dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="TextView"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 
     <TextView
 
         android:id="@+id/evenue"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:text="TextView" />
+        android:layout_height="57dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="TextView"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
 </LinearLayout>
