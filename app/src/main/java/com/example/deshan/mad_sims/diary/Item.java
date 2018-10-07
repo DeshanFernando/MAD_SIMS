@@ -33,6 +33,15 @@ public class Item implements BaseColumns, Serializable{
 
     }
 
+    public Item(){
+        this.id = 0;
+        this.title = "Test Title";
+        this.important = false;
+        this.dueDate = new Date(2018, 9, 23);
+        this.dueTime = new Time(15, 32);
+        this.body = "Test Body";
+    }
+
     public Item(int id, String title, String body, Date dueDate, Time dueTime, boolean important) {
         this.id = id;
         this.title = title;
@@ -90,7 +99,45 @@ public class Item implements BaseColumns, Serializable{
         this.important = important;
     }
 
+    public void delete(Context context){
+        DatabaseManager dbmgr = new DatabaseManager(context);
+        SQLiteDatabase db = dbmgr.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_TITLE, title);
+        values.put(COLUMN_NAME_BODY, body);
+        values.put(COLUMN_NAME_TITLE, title);
+        values.put(COLUMN_NAME_DATE, dueDate.toString());
+        //values.put(COLUMN_NAME_DATE, Date.toSQLDate(new java.util.Date(dueDate.toString())).toString());
+        values.put(COLUMN_NAME_TIME, dueTime.toString());
+        values.put(COLUMN_NAME_LEVEL, String.valueOf(important));
+
+        //long newRowId = db.insert(TABLE_NAME, null, values);
+        //System.out.println(_ID);
+        //db.update(TABLE_NAME, values, _ID+"="+id, null);
+        db.delete(TABLE_NAME, _ID+"="+id, null);
+    }
+
     public void save(Context context){
+        DatabaseManager dbmgr = new DatabaseManager(context);
+        SQLiteDatabase db = dbmgr.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_TITLE, title);
+        values.put(COLUMN_NAME_BODY, body);
+        values.put(COLUMN_NAME_TITLE, title);
+        values.put(COLUMN_NAME_DATE, dueDate.toString());
+        //values.put(COLUMN_NAME_DATE, Date.toSQLDate(new java.util.Date(dueDate.toString())).toString());
+        values.put(COLUMN_NAME_TIME, dueTime.toString());
+        values.put(COLUMN_NAME_LEVEL, String.valueOf(important));
+
+        //long newRowId = db.insert(TABLE_NAME, null, values);
+        //System.out.println(_ID);
+        db.update(TABLE_NAME, values, _ID+"="+id, null);
+
+    }
+
+    public void add(Context context){
         DatabaseManager dbmgr = new DatabaseManager(context);
         SQLiteDatabase db = dbmgr.getWritableDatabase();
 
@@ -104,9 +151,9 @@ public class Item implements BaseColumns, Serializable{
 
         //long newRowId = db.insert(TABLE_NAME, null, values);
         //System.out.println(_ID);
-        db.update(TABLE_NAME, values, _ID+"="+id, null);
-
-    } 
+        //db.update(TABLE_NAME, values, _ID+"="+id, null);
+        db.insert(TABLE_NAME, null, values);
+    }
 
     @Override
     public String toString() {

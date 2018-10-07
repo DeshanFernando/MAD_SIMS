@@ -1,5 +1,6 @@
 package com.example.deshan.mad_sims.diary;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -31,9 +33,29 @@ public class DiaryActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         title = findViewById(R.id.etSearch);
+        title.setText("2018-09-08");
 
         Button btnSearch = findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(getSearchListener());
+
+        Button btnAdd = findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(getAddEntryListener());
+
+        /*title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(DiaryActivity.this, new DatePickerDialog.OnDateSetListener(){
+                    @Override
+                    public void onDateSet(DatePicker dp, int i, int i1, int i2) {
+                        Date dx = new Date();
+                        dx.setYear(dp.getYear());
+                        dx.setMonth(dp.getMonth()+1);
+                        dx.setDay(dp.getDayOfMonth());
+                        title.setText(dx.toString());
+                    }
+                }, 2018, 2, 1).show();
+            }
+        });*/
 
         init();
 
@@ -43,7 +65,27 @@ public class DiaryActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                search();
+                new DatePickerDialog(DiaryActivity.this, new DatePickerDialog.OnDateSetListener(){
+                    @Override
+                    public void onDateSet(DatePicker dp, int i, int i1, int i2) {
+                        Date dx = new Date();
+                        dx.setYear(dp.getYear());
+                        dx.setMonth(dp.getMonth()+1);
+                        dx.setDay(dp.getDayOfMonth());
+                        title.setText(dx.toString());
+                        search();
+                    }
+                }, 2018, 2, 1).show();
+
+            }
+        };
+    }
+
+    private View.OnClickListener getAddEntryListener(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add();
             }
         };
     }
@@ -56,9 +98,19 @@ public class DiaryActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("item", (Item)listView.getItemAtPosition(i));
                 intent.putExtras(bundle);
+                intent.putExtra("requestCode", "1");
                 startActivityForResult(intent, 1);
             }
         };
+    }
+
+    private void add(){
+        Intent intent = new Intent(DiaryActivity.this, DiaryEditActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("item", new Item());
+        intent.putExtras(bundle);
+        intent.putExtra("requestCode", "2");
+        startActivityForResult(intent, 2);
     }
 
     private void search(){
@@ -81,7 +133,9 @@ public class DiaryActivity extends AppCompatActivity {
         DatabaseManager dbmgr = new DatabaseManager(this);
         SQLiteDatabase db = dbmgr.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM "+Item.TABLE_NAME, null);
+        String d = Date.valueOf(title.getText().toString()).toString();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM "+Item.TABLE_NAME + " WHERE "+Item.COLUMN_NAME_DATE+ "= '"+ d  +"' ORDER BY "+Item._ID+" DESC", null);
 
         items = new ArrayList<>();
 
